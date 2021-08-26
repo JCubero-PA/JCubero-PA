@@ -1,3 +1,64 @@
-main{
+/* main{
   min-height: 82.6vh;  
+} */
+
+body{
+  margin: 0;
+padding: 0;
 }
+#root{
+  width: 98vw;
+  margin: 0;
+  padding: 0;
+height: 97vh;
+background: black;
+margin: 0;
+padding: 0;
+
+}
+
+
+.App{
+
+position:relative;
+border: 10px solid red;
+margin: 50px auto;
+height: 450px;
+width: 450px;
+background: green;
+align-items: center;
+transition: all 1s;
+
+}
+
+div{
+
+margin: auto;
+margin-top: 50px;
+width: 200px;
+height: 140px;
+border: 4px solid red;
+background: grey;
+overflow: hidden;
+}
+
+.caja{
+  margin: auto;
+  margin-top: 50px;
+  margin-left: auto;
+  width: 200px;
+  height: 140px;
+  border: 4px solid grey;
+  background: rgb(0,255,0);
+  transition: all 1s; margin-left: 5s;
+
+}
+
+.caja:hover{
+  margin-left:180px ;
+  margin-top:180px ;
+  border: 4px solid yellow;
+  background: blue;
+  }
+
+

@@ -1,25 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
-import SideMenu from "../../components/menu/sidemenu";
-import ProductoList from "../../components/productos/productoList/productoList";
-import ProductoForm from "../../components/productos/productoForm/productoForm";
-import ProductoContextProvider from "../../contexts/productoContext";
-import LineaList from "../../components/lineas/lineaList/lineaList";
-import LineaForm from "../../components/lineas/lineaForm/lineaForm";
-import LineaContextProvider from "../../contexts/lineaContext";
-import MarcaList from "../../components/marcas/marcaList/marcaList";
-import MarcaForm from "../../components/marcas/marcaForm/marcaForm";
-import MarcaContextProvider from "../../contexts/marcaContext";
-import ProveedorList from "../../components/proveedores/proveedorList/proveedorList";
-import ProveedorForm from "../../components/proveedores/proveedorForm/proveedorForm";
-import ProveedorContextProvider from "../../contexts/proveedorContext";
-import GrupoList from "../../components/grupos/grupoList/grupoList";
-import GrupoForm from "../../components/grupos/grupoForm/grupoForm";
-import GrupoContextProvider from "../../contexts/grupoContext";
-import ModeloList from "../../components/modelo/modeloList/modeloList";
-import ModeloForm from "../../components/modelo/modeloForm/modeloForm";
-import ModeloContextProvider from "../../contexts/modeloContext";
+// import Footer from "../../components/footer/footer";
+// import Header from "../../components/header/header";
+// import SideMenu from "../../components/menu/sidemenu";
+// import ProductoList from "../../components/productos/productoList/productoList";
+// import ProductoForm from "../../components/productos/productoForm/productoForm";
+// import ProductoContextProvider from "../../contexts/productoContext";
+// import LineaList from "../../components/lineas/lineaList/lineaList";
+// import LineaForm from "../../components/lineas/lineaForm/lineaForm";
+// import LineaContextProvider from "../../contexts/lineaContext";
+// import MarcaList from "../../components/marcas/marcaList/marcaList";
+// import MarcaForm from "../../components/marcas/marcaForm/marcaForm";
+// import MarcaContextProvider from "../../contexts/marcaContext";
+// import ProveedorList from "../../components/proveedores/proveedorList/proveedorList";
+// import ProveedorForm from "../../components/proveedores/proveedorForm/proveedorForm";
+// import ProveedorContextProvider from "../../contexts/proveedorContext";
+// import GrupoList from "../../components/grupos/grupoList/grupoList";
+// import GrupoForm from "../../components/grupos/grupoForm/grupoForm";
+// import GrupoContextProvider from "../../contexts/grupoContext";
+// import ModeloList from "../../components/modelo/modeloList/modeloList";
+// import ModeloForm from "../../components/modelo/modeloForm/modeloForm";
+// import ModeloContextProvider from "../../contexts/modeloContext";
+
 
 
 import { Layout } from "antd";
@@ -30,11 +31,11 @@ import {
   Route,
   useRouteMatch
 } from "react-router-dom";
-import { ConfigProvider } from 'antd';
-import es_ES from 'antd/es/locale/es_ES';
-import SubgrupoForm from "../../components/subgrupo/subgrupoForm/subgrupoForm";
-import { SubgrupoList } from "../../components/subgrupo/subgrupoList/subgrupoList";
-import SubgrupoContextProvider from "../../contexts/subgrupoContext";
+// import { ConfigProvider } from 'antd';
+// import es_ES from 'antd/es/locale/es_ES';
+// import SubgrupoForm from "../../components/subgrupo/subgrupoForm/subgrupoForm";
+// import { SubgrupoList } from "../../components/subgrupo/subgrupoList/subgrupoList";
+// import SubgrupoContextProvider from "../../contexts/subgrupoContext";
 const Home = () => {
   
 // const Sesion= async()=>{
@@ -51,7 +52,10 @@ const Home = () => {
 
   return (
     <>
-    <Header />
+      
+        <div className="caja"></div>
+      
+    {/* <Header />
       <main>
         <SideMenu />
         <Router>
@@ -143,9 +147,9 @@ const Home = () => {
             {/*<Route path="*">
               <p>404 NOT FOUND</p>
   </Route>*/}
-        </Router>
+        {/*</Router>
       </main>
-      <Footer />
+      <Footer /> */}
     </>
   );
 };
