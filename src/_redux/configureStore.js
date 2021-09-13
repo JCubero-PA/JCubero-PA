@@ -1,7 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import productoReducer from "./ducks/producto.duck";
-import { watcherSaga, watcherSaga2, watcherSaga3, watcherSaga4, watcherSaga5, watcherSaga6, watcherSaga7 } from "./middleware/saga/sagas/producto.sagas";
+import { saga, saga2, saga3, saga4, saga5, saga6, saga7 } from "./middleware/saga/sagas/producto.sagas";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { initSagas } from "./middleware/saga";
 
@@ -18,12 +18,12 @@ const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(...mi
 
 
 initSagas(sagaMiddleware)
-// sagaMiddleware.run(watcherSaga);
-// sagaMiddleware.run(watcherSaga2);
-// sagaMiddleware.run(watcherSaga3);
-// sagaMiddleware.run(watcherSaga4);
-// sagaMiddleware.run(watcherSaga5);
-// sagaMiddleware.run(watcherSaga6);
-// sagaMiddleware.run(watcherSaga7);
+// sagaMiddleware.run(saga);
+// sagaMiddleware.run(saga2);
+// sagaMiddleware.run(saga3);
+// sagaMiddleware.run(saga4);
+// sagaMiddleware.run(saga5);
+// sagaMiddleware.run(saga6);
+// sagaMiddleware.run(saga7);
 
 export default store;
