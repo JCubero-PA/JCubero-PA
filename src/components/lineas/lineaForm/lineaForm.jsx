@@ -128,11 +128,11 @@ const FormLinea = (props) => {
           
         } else {
           // 09/09/2021 - OBSERVACIÓN: ACÁ SE DEBERÍA CONTROLAR UN CASO CONTRARIO O EL MANEJO DE UN CASO QUE NO SE ENCUENTRE UN CÓDIGO
-          alert("ERROR AL GENERAR EL CÓDIGO INTERNO A INGRESAR: " + data.message)
+          // alert("ERROR AL GENERAR EL CÓDIGO INTERNO A INGRESAR: " + data.message)
           setCodigoInterno(data.data)
         }
 
-        // console.log("LO QUE TENGO EN TRABSACTION DATA: ", typeTransactionData)
+        // console.log("LO QUE TENGO EN TRANSACTION DATA: ", typeTransactionData)
         // console.log("MAP TABLENAME: ", data.filter((t) => t.table_name_db === typeTransactionData.tableNamePSQL).code_to_add)
         /*if (typeTransactionData) {
           setCodigoInterno(data.filter((t) => t.table_name_db === typeTransactionData.tableNamePSQL))

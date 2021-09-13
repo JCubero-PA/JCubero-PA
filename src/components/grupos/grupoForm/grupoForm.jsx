@@ -134,9 +134,8 @@ const FormGrupo = (props) => {
 
     // OBSERVACIÓN: ESTO SE DEBE REEMPLAZAR POR LA VARIABLE DE SESIÓN EN CUANTO ESTE CULMINADA
     // values["fk_empresa_id"] = "60d4bc7d22b552b5af1280bc";
-
-    console.log("EL ID QUE TRAE: " + id);
-    console.log("LOS VALUES DEL FORMULARIO: " + JSON.stringify(values));
+    //console.log("EL ID QUE TRAE: " + id);
+    // console.log("LOS VALUES DEL FORMULARIO: " + JSON.stringify(values));
 
     if (id) {
 
@@ -229,10 +228,8 @@ const FormGrupo = (props) => {
   };
 
   const handleFormValuesChange = async (changedValues) => {
-    // console.log("ONCHANGE", form.getFieldsValue());
 
     formHasChanges = operacion === "editar" || codigo === "nuevo" ? true : false;
-
     const formFieldName = Object.keys(changedValues)[0];
 
     if (formFieldName === "fk_linea_id") {
@@ -243,16 +240,6 @@ const FormGrupo = (props) => {
       form.setFieldsValue({ fk_marca_id: undefined });
       form.setFieldsValue({ codigo: undefined });
 
-      // const lineaService = new LineaService();
-      // const linea = await lineaService.getOne(changedValues[formFieldName]);
-
-      // console.log("LO QUE ME DVUELVE DE LINEA SERVICE EN CHANGES: " + JSON.stringify(linea))
-
-      /*form.setFieldsValue({ codigo_interno: linea.pseudo });
-      if (changedValues[formFieldName] === "60d4c04b894c18b5e810e025") {
-      } else {
-        form.setFieldsValue({ nombre: linea.pseudo });
-      }*/
     }
 
     if (formFieldName === "fk_marca_id") {
@@ -260,14 +247,13 @@ const FormGrupo = (props) => {
 
       const lineasMarcasService = new LineasMarcasService();
       // console.log("LA MARCA CON LA QUE VA A MAPEAR: " + changedValues[formFieldName])
-
       const codigoInternoData = await lineasMarcasService.getAll().then((data) => { // OBSERVACIÓN 31/08/2021: DEBE SER EL LLAMADO A UN GETONE() - MC
         // console.log("LA DATA LINEA_MARCA: ", data);
         // console.log("CON LO QUE VA A MAPPEAR: ", changedValues[formFieldName])
         // console.log("CON LO QUE VA A MAPPEAR LINEA ID: ", selectedLineaId)
         // console.log("LA DATA DE LINEA_MARCA MAPPEADO: " +  JSON.stringify(data.filter((lm) => lm.fk_marca_id === changedValues[formFieldName] && lm.fk_linea_id === selectedLineaId)))
         // setSelectedLineaMarcaId(data.filter((lm) => lm.fk_marca_id === changedValues[formFieldName] && lm.fk_linea_id === selectedLineaId))
-
+        
         // initialValues.fk_linea_marca = data.filter((lm) => lm.fk_marca_id === changedValues[formFieldName] && lm.fk_linea_id === selectedLineaId)[0].id;
 
         // console.log("MI VALUES!! " + JSON.stringify(initialValues))
@@ -277,11 +263,11 @@ const FormGrupo = (props) => {
         // REVISAR return data.filter((lm) => lm.fk_marca_id === changedValues[formFieldName] && lm.fk_linea_id === selectedLineaId);
 
         // DEEBE IR IF 
-
         // console.log("LO QUE QUIERO ASIGNAR: " + data.filter((lm) => lm.fk_marca_id === changedValues[formFieldName] && lm.fk_linea_id === selectedLineaId)[0].id);
         // initialValues.fk_linea_marca = data.filter((lm) => lm.fk_marca_id === changedValues[formFieldName] && lm.fk_linea_id === selectedLineaId)[0].id;
         // setOpciones(data.filter((p) => p.marca_id === filter && p.linea_id === filter2));
         // setOpciones(data.filter((p) => p.linea_id === filter));
+
         return data.filter((lm) => lm.fk_marca_id === changedValues[formFieldName] && lm.fk_linea_id === selectedLineaId);
       });
 
@@ -294,59 +280,54 @@ const FormGrupo = (props) => {
         initialValues.fk_linea_marca = codigoInternoData[0].id;
         // console.log("MI VALUES!! " + JSON.stringify(initialValues))
 
-        const secuencialesGrupoService = new SecuencialesGrupoService();
+        if (typeTransactionData) {
+          // 13/09/2021 - OBSERVACIÓN: SE DEBERÍA DEFINIR UN NOMBRE PARA HACER ESE TIPO DE BÚSQUEDA O FILTRO DESDE UNA VISTA
+          // Example: typeTransactionData.filterColumView
+          typeTransactionData.fk_linea_marca = codigoInternoData[0].id;
 
-        secuencialesGrupoService.getAll().then((data) => {
-          // console.log("LA DATA QUE DEVUELVE DEL SECUENCIALES: ", data)
-          // console.log("ESTA ES MI LLAVE !!!!: ", codigoInternoData[0].id)
-          const tempCodigoInterno = data.filter((s) => s.fk_linea_marca === codigoInternoData[0].id);
-          // console.log("LO QUE MAPEO: "+ JSON.stringify(data.filter((s) => s.fk_linea_marca === codigoInternoData[0].id)))
-          // AGREAGR EL IF PARA CONTROL Y EL CASO CONTRARIO CON ASIGNACION 001
-          // console.log("MI CODIGO A GUARDAR!!!!!!!!!!  " + tempCodigoInterno[0].code_to_add)
-          if (tempCodigoInterno.length > 0) {
-            ///console.log("EXISTEEEEEEE: ", tempCodigoInterno.length)
-            setCodigoInterno(tempCodigoInterno[0].code_to_add);
-            form.setFieldsValue({ codigo: tempCodigoInterno[0].code_to_add });
+          const secuencialesGrupoService = new SecuencialesGrupoService();
+          secuencialesGrupoService.getOne(typeTransactionData).then((data) => {
+
+          if (data.message.includes("OK")) {
+            if (data.data) {
+              // console.log("SE VA CON ESTE CODIGO: ", data.data.code_to_add)
+              setCodigoInterno(data.data.code_to_add);
+              form.setFieldsValue({ codigo: data.data.code_to_add });
+              // console.log("EL LENGTH : ", data.data.length)
+              ///console.log("EXISTEEEEEEE: ", tempCodigoInterno.length)
+              // const tempCodigoInterno = data.data;
+              // if (data.data.length > 0) {
+              ///console.log("EXISTEEEEEEE: ", tempCodigoInterno.length)
+              // setCodigoInterno(data.data.code_to_add);
+              // form.setFieldsValue({ codigo: data.data.code_to_add });
+              // } else {
+              // setCodigoInterno("001");
+              // form.setFieldsValue({ codigo: "001" });
+              /// }
+              // setCodigoInterno(tempCodigoInterno[0].code_to_add);
+              // form.setFieldsValue({ codigo: tempCodigoInterno[0].code_to_add });
+            } else {
+              setCodigoInterno("001");
+              form.setFieldsValue({ codigo: "001" });
+            }
+            setCodigoInterno(data.data)
+            // }
+
           } else {
-            setCodigoInterno("001");
-            form.setFieldsValue({ codigo: "001" });
+            // 09/09/2021 - OBSERVACIÓN: ACÁ SE DEBERÍA CONTROLAR UN CASO CONTRARIO O EL MANEJO DE UN CASO QUE NO SE ENCUENTRE UN CÓDIGO
+            // alert("ERROR AL GENERAR EL CÓDIGO INTERNO A INGRESAR: " + data.message)
+            setCodigoInterno(data.data)
           }
-          // setCodigoInterno(tempCodigoInterno[0].code_to_add);
-          // form.setFieldsValue({ codigo: tempCodigoInterno[0].code_to_add });
-        });
-
+          });
+        }
       }
-
-      // initialValues.fk_linea_marca = selectedLineaMarcaId[0].id;
-
-      /* LE COMENTE ESTO ES ORIGINAL const secuencialesGrupoService = new SecuencialesGrupoService();
-
-      secuencialesGrupoService.getAll().then((data) => {
-        console.log("LA DATA QUE DEVUELVE DEL SECUENCIALES: ", data)
-        console.log("ESTA ES MI LLAVE !!!!: ", codigoInternoData)
-
-        setCodigoInterno(data)});
-        */
-
-      /*form.setFieldsValue({ nombre: undefined });
-      const marcaService = new MarcaService();
-      const marca = await marcaService.getOne(changedValues[formFieldName]);
-      form.setFieldsValue({
-        codigo_interno:
-          form.getFieldValue("codigo_interno").substring(0, 3) +
-          "-" +
-          marca.codigo,
-      });*/
-
-      // form.setFieldsValue({ codigo: "0007" })
-
     };
 
   };
 if(sesions){
   if (sesions._usuario[0].rol ===2|| operacion === "ver") {
     return (
-      editGrupo || codigo === "nuevo" ? (
+      editGrupo || codigo === "nuevo" ? ( //13/09/2021 - OBSERVACIÓN: CONTROLAR CON SPIN LA CARGA DEL FORMULARIO - MC
         <>
           <Form
             {...layout}

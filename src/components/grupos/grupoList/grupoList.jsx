@@ -220,7 +220,6 @@ const GrupoList = () => {
     
     setEditGrupo(null);
     setPermiso(false);
-
     if (!value) {
       // console.log(grupos)
       // setDataSource(grupo_marcas_nn)

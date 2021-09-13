@@ -70,7 +70,7 @@ const GrupoContextProvider = (props) => {
 
       const lineamarca =  await lineasMarcasService.getAllLineasmarcas().then((data) => {
         // console.log("LA DATA COMO NO DEBE SER: ", data)
-        console.log("LA DATA FILTEREDDD: ", data.filter((lm) => lm.id === grupo.fk_linea_marca))
+        // console.log("LA DATA FILTEREDDD: ", data.filter((lm) => lm.id === grupo.fk_linea_marca))
         return data.filter((lm) => lm.id === grupo.fk_linea_marca);
       });
 
