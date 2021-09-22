@@ -21,11 +21,15 @@ import ProductoList from "../../productos/productoList/productoList";
 import { useHistory, useRouteMatch } from "react-router";
 
 const Stocks = () => {
+
+  // Selectors para traer data de Redux
   const subgrupos = useSelector((state) => state.stocks.subgrupos);
   const productos = useSelector((state) => state.productos.productos);
   const grupos = useSelector((state) => state.stocks.grupos);
   const _lineas = useSelector((state) => state.stocks.lineas);
   const loading = useSelector((state) => state.stocks.loading);
+
+  // States para renderizados por tipo, grupo, marca, linea, etc
   const [lineas, setLineas] = useState(null);
   const [marcas, setMarcas] = useState([]);
   const [_grupos, set_Grupos] = useState(null);
@@ -39,10 +43,13 @@ const Stocks = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   let { path } = useRouteMatch();
+
+  // UseEffect para cargar subgrupos (listado inicial)
   useEffect(() => {
     dispatch(getSubgrupos());
   }, [dispatch]);
 
+  // UseEffect para filtrar grupos por linea
   useEffect(() => {
     if (grupos) {
       setLineas(
@@ -53,9 +60,13 @@ const Stocks = () => {
     }
   }, [grupos]);
 
+  // UseEffect para setear lineas filtradas
+
   useEffect(() => {
     setLineas(_lineas);
   }, [_lineas]);
+
+  // UseEffect para cargar productos
 
   useEffect(() => {
     if (productos) {
@@ -63,6 +74,7 @@ const Stocks = () => {
     }
   }, [productos]);
 
+  // Función para ir a grupos
   const goGrupos = (id) => {
     setTitle("GRUPOS");
 
@@ -80,6 +92,8 @@ const Stocks = () => {
     );
   };
 
+  // Función para ir a marcas
+
   const goMarcas = (id) => {
     setTitle("MARCAS");
 
@@ -96,6 +110,8 @@ const Stocks = () => {
     setCheckPoint(true);
   };
 
+  // Función para ir a lineas
+
   const goLineas = (id) => {
     setTitle("LÍNEAS");
     setHasReturn(true);
@@ -105,6 +121,8 @@ const Stocks = () => {
       dispatch(getGruposLineaBySubgrupo(id));
     }
   };
+
+  // Función para ir a productos
 
   const goProductos = (id) => {
     setSelectedGrupoID(id);
@@ -116,12 +134,16 @@ const Stocks = () => {
     dispatch(getLineas());
   };
 
+  // Funciona para utilizar boton de navegación propio (pensado para movil)
   useEffect(() => {
     window.history.pushState(null, null, window.location.href);
     window.onpopstate = function () {
       window.history.go(1);
     };
   });
+
+
+  // Función de retroceso en visualizador
 
   const goBack = (id) => {
     if (grupos) {

@@ -2,10 +2,14 @@ import { call, put } from "redux-saga/effects";
 import { productoResponse, setProducto, setProductos, setProductosByGrupo, setProductosByLinea, _setSerialModelo} from "../../../ducks/producto.duck";
 import { createProducto, getAllProductos, getProducto, getProductosByLinea, softDeleteProducto, updateProducto,  getSerialModelo, getProductosByGrupo } from "../requests/producto.requests";
 
+//Aquí se registran todos los manejadores de estado (funciones generadoras)
+
 export function* handleGetProductos() {
   try {
+    //Llamado (request) a la API
     const response = yield call(getAllProductos);
     const { data } = response;
+    //Llamado al action para servir los datos obtenidos
     yield put(setProductos(data));
   } catch (error) {
     console.log(error);

@@ -1,3 +1,4 @@
+// Archivo para registrar todas las sagas
 import * as watcher from './sagas/producto.sagas';
 import * as watcher2 from './sagas/stocks.sagas';
 export function initSagas(sagaMiddleware) {

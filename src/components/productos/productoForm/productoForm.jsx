@@ -87,14 +87,25 @@ const FormProducto = (props) => {
 
   console.log("codigo", codigo);
   console.log("operacion", operacion);
-
+  
+  // Sates para manejo de filtros
   const [selectedMarcaId, setSelectedMarcaId] = useState(undefined);
   const [selectedLineaId, setSelectedLineaId] = useState(undefined);
   const [selectedGrupoId, setSelectedGrupoId] = useState(undefined);
+
+  // State para manejo de nombre de grupo
   const [selectedGrupoName, setSelectedGrupoName] = useState(undefined);
   const [selectedModeloCodigo, setSelectedModeloCodigo] = useState(undefined);
+
+  // State para manejo de modelos
   const [newModelo, setNewModelo] = useState(false);
+
+  // States para manejo de Stock
   const [stock, setStock] = useState(null);
+  const [stockBodegas, setstockBodegas] = useState(null);
+
+
+  // Sates para manejo de varias propiedades
   const [tipoInventario, setTipoInventario] = useState(undefined);
   const [tipoProducto, setTipoProducto] = useState(undefined);
   const [generacionClick, setGeneracionClick] = useState(undefined);
@@ -104,20 +115,26 @@ const FormProducto = (props) => {
   const [metodoABC, setMetodoABC] = useState(undefined);
   const [nombre, setNombre] = useState(undefined);
   const [nombreEdit, setNombreEdit] = useState(false);
+  const [unidadMedida, setUnidadMedida] = useState("");
+
+  // Satet para manejo de código QR
   const [QR, setQR] = useState(null);
-  const [stockBodegas, setstockBodegas] = useState(null);
+  
+  // Sate para controlar renderizaciones
   const [crud, setCrud] = useState(
     operacion === "editar" || codigo === "nuevo" ? true : false
   );
-  const [unidadMedida, setUnidadMedida] = useState("");
-
-  const [id, setId] = useState(null);
-  const [show, setShow] = useState(null);
   const [infoTecnicaLinea, setinfoTecnicaLinea] = useState(null);
   const [infoTecnicaGrupo, setinfoTecnicaGrupo] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(null);
+  const [show, setShow] = useState(null);
+
+  // Sate para control de ID
+  const [id, setId] = useState(null);
   const [_serial, set_Serial] = useState(null);
   // const [precio, setPrecio] = useState(null)
+
+  // Inicializacion de formulario
   const [form] = Form.useForm();
   let initialValues = {
     en_sistema_externo: false,
@@ -130,6 +147,7 @@ const FormProducto = (props) => {
     limite_descuento5: 0,
   };
 
+  // Objetos para renderización de Listados
   var tiposFilamentoList = tiposFilamento.map(function (opcion) {
     return (
       <Option key={opcion.id} value={opcion.id}>
@@ -189,6 +207,7 @@ const FormProducto = (props) => {
   });
   const response = useSelector((state) => state.productos.response);
 
+  // Use Effect para acceder al boton de retorno en navegador
   useEffect(() => {
     window.onpopstate = (e) => {
       window.scrollTo(0, 0);
@@ -196,6 +215,7 @@ const FormProducto = (props) => {
     };
   });
 
+  // Use Effect para controlar mensaje de respuesta del servidor
   useEffect(() => {
     if (response) {
       if (response.message.includes("OK")) {
@@ -224,19 +244,24 @@ const FormProducto = (props) => {
   //   }
   // }, [infoTecnicaLinea]);
 
+  // Instancia de dispatch para Redux
   const dispatch = useDispatch();
 
+  // Use Effect para controlar modo edición
   useEffect(() => {
     if (codigo !== "nuevo") {
       dispatch(getProducto(codigo));
     }
   }, [dispatch]);
 
+  // Selectors para traer data del REDUX
   const editProducto = useSelector((state) => state.productos.producto);
   const serial = useSelector((state) => state.productos.serial);
   const grupos = useSelector((state) => state.stocks.grupos);
 
   console.log("EL PROD", editProducto);
+
+  // Use Effect para carga dinamica de codigos por secuencial de grupo
 
   useEffect(async () => {
     if (
@@ -292,6 +317,7 @@ const FormProducto = (props) => {
     }
   }, [serial]);
 
+  // Use Effect para controlar renderizados de Stock
   useEffect(() => {
     if (crud === null) {
       setCrud(operacion === "editar" || codigo === "nuevo" ? true : false);
@@ -361,6 +387,8 @@ const FormProducto = (props) => {
     // };
   });
 
+  // Objecto para configurar interfaz
+
   const layout = {
     labelCol: {
       span: 8,
@@ -391,6 +419,7 @@ const FormProducto = (props) => {
   // }
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
+  // Funciones para renderizar componentes 
   const genExtra = () => (
     <PushpinFilled
       onClick={(event) => {
@@ -418,6 +447,7 @@ const FormProducto = (props) => {
   //   return Math.floor(Math.random() * (max - min) + min);
   // }
 
+  // Función para el finalizado del formulario
   const onFinish = async (values) => {
     let data = null;
 
@@ -431,11 +461,15 @@ const FormProducto = (props) => {
     }
     //   values["modelo"] = JSON.parse(values["modelo"]).id;
     // }
+
+    // Cast de precio y costo
     values["precio"] = parseFloat(values["precio"]).toFixed(2);
     values["costo"] = parseFloat(values["costo"]).toFixed(2);
 
     console.log("Success:", values);
     // values["atributos_js"] = final;
+
+    // Condicional para editar si tiene ID 
     if (id) {
       values["id"] = id;
       console.log("values", values);
@@ -449,11 +483,16 @@ const FormProducto = (props) => {
       console.log("zzzzz", data);
     }
   };
+
+  // Función si hay errores
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
     message.warning("Error al guardar producto...");
   };
   //--------------------------------------------------------------------------------
+  
+  // Función para detectar cambios en el formulario
   const handleFormValuesChange = async (changedValues) => {
     formHasChanges =
       operacion === "editar" || codigo === "nuevo" ? true : false;
@@ -475,7 +514,15 @@ const FormProducto = (props) => {
 
     // form.setFieldsValue({'atributos_js.general.capa_desgaste' : "cambio"})
 
+    // Obtener nombre de campo modificado
     const formFieldName = Object.keys(changedValues)[0];
+
+
+    if (typeof form.getFieldValue(formFieldName) === 'string'){
+
+      form.setFieldsValue({[formFieldName]: form.getFieldValue(formFieldName).toUpperCase()})
+    }
+
 
     if (formFieldName === "fk_unidad_medida_id") {
       setUnidadMedida(changedValues[formFieldName]);
@@ -494,6 +541,7 @@ const FormProducto = (props) => {
       setNombreEdit(true);
     }
 
+    // Validaciones para marca
     if (formFieldName === "fk_marca_id") {
       setSelectedMarcaId(changedValues[formFieldName]);
       setSelectedGrupoId(null);
@@ -528,6 +576,7 @@ const FormProducto = (props) => {
 
     // }
 
+    // Validaciones para linea
     if (formFieldName === "fk_linea_id") {
       setinfoTecnicaLinea(form.getFieldValue("fk_linea_id"));
 
@@ -647,6 +696,7 @@ const FormProducto = (props) => {
         });
       }
     }
+    // Validaciones para modelo
 
     if (formFieldName === "modelo") {
       // const colorService = new ColorService();
@@ -708,6 +758,8 @@ const FormProducto = (props) => {
       //     });
       //   }
     }
+
+    // Validaciones para grupo
 
     if (formFieldName === "fk_grupo_id") {
       if (form.getFieldValue("fk_grupo_id") === "60d617738d422eca134f6685") {
@@ -781,6 +833,8 @@ const FormProducto = (props) => {
     // }
   };
   //----------------------------------------------------------------------------------------------------
+  
+  // Deteccion de cambios en atributos
   const onChangeTipoInventario = (e) => {
     setTipoInventario(e.target.value);
   };
@@ -845,6 +899,7 @@ const FormProducto = (props) => {
     setIsModalVisible(false);
   };
 
+  // Función para manejar la descarga de PDF
   const handleDownload = async () => {
     if (editProducto.url_pagina_web) {
       const data = await new ProductoService().generateQRPdf(editProducto);
@@ -853,6 +908,7 @@ const FormProducto = (props) => {
     }
   };
 
+  // Función para manejar la generación de QR
   const generarQR = async () => {
     if (editProducto.url_pagina_web) {
       await new ProductoService()

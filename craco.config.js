@@ -1,5 +1,6 @@
 const CracoLessPlugin = require('craco-less');
 
+// Archivo para sobreescritura de atributos en tema Ant Design
 module.exports = {
   plugins: [
     {

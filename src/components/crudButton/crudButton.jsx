@@ -9,19 +9,27 @@ import { useDispatch } from "react-redux";
 import Hashids from 'hashids';
 let { REACT_APP_SEED } = process.env;
 const hashids = new Hashids(REACT_APP_SEED);
+// Botón para CRUD por registro en Tablas
 
 const CrudButton = (props) => {
+
+  //Desestructuracion de parametros por props
   const { record, softDelete, setRowState, typeTransaction, permiso, visualizador } = props;
   // console.log("LOS PROPS", props)
   let { path } = useRouteMatch();
   const [isModalVisible, setIsModalVisible] = useState(null);
+  // Sate para código QR
   const [QR, setQR] = useState(null);
   // console.log("EL TIPO DE TRANSACTION: " + JSON.stringify(typeTransaction));
   // console.log("RECORD: " + JSON.stringify(record));
   // console.log("EL SOFDELETE DE CRUDBUTTON: " + softDelete);
   // console.log("EL ROWSTATE = ", setRowState )
+  
+  // Instancia para dispatch de ACTIONS (REDUX)
   const dispatch = useDispatch();
   console.log("El permiso", permiso)
+
+  // Control de POP UP
   const showModal = (t) => {
     setRowState(false);
     setIsModalVisible(t);
@@ -86,6 +94,7 @@ const CrudButton = (props) => {
     setIsModalVisible(null);
   };
 
+  // Control de click por fila
   const handleCancel = () => {
     setRowState(true);
     setIsModalVisible(false);
@@ -95,12 +104,14 @@ const CrudButton = (props) => {
     // console.log("click", e);
   }
 
+  // Instancia de history para rutas
   let history = useHistory();
 
   function eliminar() {
     showModal("eliminar");
   }
 
+  // Función para generar código QR
   const generarQR = async () => {
     if (record.url_pagina_web) {
       await new ProductoService()
@@ -111,6 +122,8 @@ const CrudButton = (props) => {
     showModal("qr");
   };
 
+
+  // Función para descargar QR
   const handleDownload = async () => {
     if (record.url_pagina_web) {
       const data = await new ProductoService()
@@ -121,6 +134,7 @@ const CrudButton = (props) => {
 
   };
 
+  // Función para redireccionar a editar
   function editar() {
     record["permiso"] = true;
     // console.log("ENTRA  EL TYPE AL EDITAR DEL CRUD CON " + JSON.stringify(typeTransaction));
@@ -161,6 +175,7 @@ const CrudButton = (props) => {
     // history.push(`${path}/${record.codigo_interno}/editar`, record);
   }
 
+  // Objeto para renderizar el menu
   const menu = (
     <Menu onClick={handleMenuClick}>
       {/* <Menu.Item icon={<EyeFilled />}key="1" onClick={ver}>

@@ -2,6 +2,8 @@ import axios from "axios";
 import { baseUrl } from "../../../../utils/constantes";
 let { REACT_APP_API_KEY } = process.env;
 
+// Aquí se registran todos los llamados a la API
+
 export function getAllProductos(){
     return axios.get(baseUrl+"vista-all", {
         headers: {

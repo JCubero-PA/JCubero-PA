@@ -2,7 +2,11 @@ import { takeLatest } from "redux-saga/effects";
 import { handleAddProducto, handleEditProducto, handleGetProducto, handleGetProductos, handleGetProductosByGrupo, handleGetProductosByLinea, handleGetSerialModelo, handleSoftDeleteProducto } from "../handlers/producto.handlers";
 import { ADD_PRODUCTO, EDIT_PRODUCTO, GET_PRODUCTO, GET_PRODUCTOS, GET_PRODUCTOS_BY_GRUPO, GET_PRODUCTOS_BY_LINEA, GET_SERIAL_MODELO, SOFT_DELETE_PRODUCTO } from "../../../ducks/producto.duck";
 
+// Aquí se registran todas las sagas para los reducers
+
 export function* saga() {
+  // Usamos efecto TAKELATEST para tomar solo el último evento
+  // Pasamos como parámetro el ACTION y el manejador de estado (HANDLER)  
   yield takeLatest(GET_PRODUCTOS, handleGetProductos);
 }
 

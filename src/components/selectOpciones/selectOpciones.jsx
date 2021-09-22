@@ -33,12 +33,18 @@ import { ProductoService } from "../../services/productoService";
 
 const { Option } = Select;
 const SelectOpciones = (props) => {
-
+  
+  // Recibiendo parametros como props por desestructuración
   const { tipo, onChange, value, filter, filter2, filter3, readOnly, setShow, typeTransaction } =
     props;
+
+  // State para opciones
   const [opciones, setOpciones] = useState([]);
 
  // console.log("MIS PROPS",props);
+
+  // UseEffect para el control de todos los dropdowns de opciones
+
   useEffect(() => {
     let cancel = false;
 
@@ -240,6 +246,7 @@ const SelectOpciones = (props) => {
     };
   }, [filter]);
 
+  // Funcion para manejar cambios
   function handleChange(value) {
     // console.log("VALORES CON LABEL",value);
       onChange(value);
@@ -256,6 +263,8 @@ const SelectOpciones = (props) => {
   function onSearch(val) {
     console.log("search:", val);
   }
+
+  // Objeto para renderización de opciones del dropdown
 
   var opcionesList = opciones.map(function (opcion) {
     if (opcion.codigo) {

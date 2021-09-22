@@ -23,6 +23,8 @@ import { SesionContext } from "../../../contexts/sesionContext";
 
 const ProductoList = (props) => {
   const { setMoved, sesions } = useContext(SesionContext);
+
+  //PROPS para visualizador por desestructuración
   const { lineaV, marcaV, grupoV, visualizador, stocks } = props;
   // const {
   //   // productos,
@@ -34,12 +36,17 @@ const ProductoList = (props) => {
   //   filterProductos,
   // } = useContext(ProductoContext);
   let { path } = useRouteMatch();
+  // State para filtrar por valor de búsqueda
   const [value, setValue] = useState(null);
+
+  // Selectors para traer data desde REDUX
   const productos = useSelector((state) => state.productos.productos);
   const producto = useSelector((state) => state.productos.producto);
   const loading = useSelector((state) => state.productos.loading);
   const response = useSelector((state) => state.productos.response);
   const grupos = useSelector((state) => state.stocks.grupos);
+
+  // Control de filtro para PRODUCTOS o STOCKS
   const [selectedLineaId, setSelectedLineaId] = useState(
     grupos
       ? lineaV
@@ -68,14 +75,28 @@ const ProductoList = (props) => {
         : response.data.fk_grupo_id
       : producto.fk_grupo_id
   );
+
+  // State para control de filtros especificos o todos los productos
+
   const [filtro, setFiltro] = useState(null);
   const [filterAll, setFilterAll] = useState(false);
+
+
+  // State para controlar datasource de la tabla
   const [dataSource, setDataSource] = useState([]);
+
+  // State para activar o desactivar fila por pop up
   const [rowState, setRowState] = useState(true);
+
+  // State para área de click
   const [click, setClick] = useState(0.8);
   console.log("path");
+
+  // State para filtrar listado
   const [filteredInfo, setFilteredInfo] = useState([]);
   // const size = useWindowSize();
+
+  // Funcion para detectar cambios en la informacion de la tabla (filtro, orden, paginacion)
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
 
@@ -91,8 +112,11 @@ const ProductoList = (props) => {
   //   }
   // });
   console.log("state", productos);
+
+  // Instancia de dispatch
   const dispatch = useDispatch();
 
+  // UseEffect para dispatch que trae productos por linea o todos
   useEffect(() => {
     //dispatch(getProducto('005-004-001-001'));
     //dispatch(getProductosByLinea('60d4c0476e8514b5e8c66fd5'));
@@ -101,6 +125,7 @@ const ProductoList = (props) => {
     );
   }, [dispatch, selectedLineaId]);
 
+  // UseEffect para mostrar data en la tabla según búsqueda
   useEffect(() => {
     //dispatch(getProducto('005-004-001-001'));
     //dispatch(getProductosByLinea('60d4c0476e8514b5e8c66fd5'));
@@ -123,6 +148,8 @@ const ProductoList = (props) => {
     }
   });
 
+
+  //UseEffect para mostar data en tabla según filtros de marca o grupo
   useEffect(() => {
     // filtrarG(producto.fk_grupo_id)
     setDataSource(productos);
@@ -139,6 +166,8 @@ const ProductoList = (props) => {
   }, [productos]);
 
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+  // Columnas de la tabla condicionales según rol
   const columns =
     sesions && sesions._usuario[0].rol === 2
       ? [
@@ -608,8 +637,10 @@ const ProductoList = (props) => {
           },
         ];
 
+  // Instancia de history
   let history = useHistory();
 
+  // Función para redireccion a nuevo producto
   function handleClick() {
     //filterProductos("60d4c046e600f1b5e85d075c");
     //setPermiso(true);
@@ -621,11 +652,15 @@ const ProductoList = (props) => {
     history.push(`${path}/nuevo/`, record);
   }
 
+  // Función para redireccion a ver producto
+
   function ver(record) {
     //filterProductos(record.fk_linea_id);
     record["permiso"] = false;
     history.push(`${path}/${record.codigo_interno}/ver`, record);
   }
+
+  // Función de filtrado en búsqueda
 
   const filtrarB = (e) => {
     const currValue = e.target.value;
@@ -645,6 +680,8 @@ const ProductoList = (props) => {
     setDataSource(filteredData);
   };
 
+  // Función de filtrado por marca
+
   const filtrarM = (e) => {
     setFiltro(e);
 
@@ -654,6 +691,8 @@ const ProductoList = (props) => {
 
     setDataSource(filteredData);
   };
+
+  // Función de filtrado por grupo
 
   const filtrarG = (e) => {
     setFiltro(e);
@@ -667,6 +706,8 @@ const ProductoList = (props) => {
 
     setDataSource(filteredData);
   };
+
+  // Función para traer todos los productos anulando filtros
 
   const filtroGlobal = (e) => {
     if (e.target.checked) {
