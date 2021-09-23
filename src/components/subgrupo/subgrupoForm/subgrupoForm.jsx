@@ -62,7 +62,7 @@ const SubgrupoForm = () => {
     if (data.message.includes("OK")) {
 
       message.info(JSON.stringify(data.message) + " -  EL SUBGRUPO: " + JSON.stringify(data.data.nombre) + " SE " + messagesOnFinish[1] + " CON ÉXITO", 2).then((t) => history.push("/home/subgrupo/"));
-
+      
     } else {
       message.error("ERROR AL MOMENTO DE " + messagesOnFinish[0] + " EL SUBGRUPO - \n" + JSON.stringify(data.errorDetails.description), 15);
     }

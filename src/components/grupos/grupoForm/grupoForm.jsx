@@ -105,6 +105,30 @@ const FormGrupo = (props) => {
 
     }
 
+    /*if (form.getFieldValue("codigo") && form.getFieldValue("fk_marca_id")) {
+      // console.log("HAY CAMBIOS EN EL CODIGO DE GRUPO!!!: ")
+      console.log("USEEFFECT - EL EDIT GRUPPO Q TENNGO: ", JSON.stringify(editGrupo))
+
+      if (operacion === "editar") {
+
+        if (form.getFieldValue("fk_marca_id") !== editGrupo.fk_marca_id) {
+
+          console.log("USEEFFECT - DEBE CONSULTAR UN NUEVO CODIGOL")
+
+          // INCIO DE TRAIDA DE SECUENCIAL
+          
+
+        } else {
+
+          console.log("USEEFFECT -DEBE VOLVER AL CODIGO INICIAL")
+          form.setFieldsValue({
+            codigo: editGrupo.codigo
+          });
+
+        }
+      }
+    }*/
+
     if (editGrupo) {
       // console.log("QUIERO SETEAR CON ESTO:  "+ editGrupo.grupo_marcas_nn[0].grupo_marca.fk_linea_id)
       // console.log("QUIERO SETEAR CON ESTO (EDITGRUPO):  " + JSON.stringify(editGrupo));
@@ -208,12 +232,12 @@ const FormGrupo = (props) => {
       if (codigo === "nuevo") {
         const grupoService = new GrupoService();
         const grupoCreated = await grupoService.getOne(data.data.id);
-        if (grupoCreated){
+        if (grupoCreated) {
           message.info(JSON.stringify(data.message) + " -  EL GRUPO: " + JSON.stringify(grupoCreated.codigo) + " - " + JSON.stringify(grupoCreated.nombre) +
-          " SE " + messagesOnFinish[1] + " CON ÉXITO", 2).then((t) => history.push("/home/grupos/"));
+            " SE " + messagesOnFinish[1] + " CON ÉXITO", 2).then((t) => history.push("/home/grupos/"));
         } else {
           message.info(JSON.stringify(data.message) + " -  EL GRUPO: " + JSON.stringify(data.data.codigo) + " - " + JSON.stringify(data.data.nombre) +
-          " SE " + messagesOnFinish[1] + " CON ÉXITO", 2).then((t) => history.push("/home/grupos/"));
+            " SE " + messagesOnFinish[1] + " CON ÉXITO", 2).then((t) => history.push("/home/grupos/"));
         }
       } else {
         message.info(JSON.stringify(data.message) + " -  EL GRUPO: " + JSON.stringify(data.data.codigo) + " - " + JSON.stringify(data.data.nombre) +
@@ -359,7 +383,7 @@ const FormGrupo = (props) => {
               setCodigoInterno(data.data)
             }
           });
-        }
+        }// 17/09/2021 - OBSERVACIÓN: ACÁ SE DEBERÍA CONTROLAR UN CASO CONTRARIO CUANDO NO TENGA UN typeTransactionData Ó LA ESTRUCTURA CORRECTA EN ESTA VARIABLE
       } else {
         setCodigoInterno("001");
         form.setFieldsValue({ codigo: "001" });

@@ -5,6 +5,8 @@ export const GET_PRODUCTO = "GET_PRODUCTO";
 export const SET_PRODUCTO = "SET_PRODUCTO";
 export const GET_PRODUCTOS_BY_LINEA = "GET_PRODUCTOS_BY_LINEA";
 export const SET_PRODUCTOS_BY_LINEA = "SET_PRODUCTOS_BY_LINEA";
+export const GET_PRODUCTOS_BY_GRUPO = "GET_PRODUCTOS_BY_GRUPO";
+export const SET_PRODUCTOS_BY_GRUPO = "SET_PRODUCTOS_BY_GRUPO";
 export const ADD_PRODUCTO = "ADD_PRODUCTO";
 export const EDIT_PRODUCTO = "EDIT_PRODUCTO";
 export const GET_SERIAL_MODELO = "GET_SERIAL_MODELO";
@@ -23,6 +25,11 @@ export const getProductosByLinea = (id) => ({
   id
 });
 
+export const getProductosByGrupo = (id) => ({
+  type: GET_PRODUCTOS_BY_GRUPO,
+  id
+});
+
 export const setProductos = (productos) => ({
   type: SET_PRODUCTOS,
   productos,
@@ -31,6 +38,11 @@ export const setProductos = (productos) => ({
 
 export const setProductosByLinea = (productos) => ({
   type: SET_PRODUCTOS_BY_LINEA,
+  productos,
+});
+
+export const setProductosByGrupo = (productos) => ({
+  type: SET_PRODUCTOS_BY_GRUPO,
   productos,
 });
 
@@ -86,6 +98,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCTOS:
     case SET_PRODUCTOS_BY_LINEA:
+    case SET_PRODUCTOS_BY_GRUPO:
       return { ...state, productos:productos.data, producto:null, response:null, loading: false };
     case SET_PRODUCTO:
       return {...state, producto: producto.data[0]?producto.data[0]:undefined};

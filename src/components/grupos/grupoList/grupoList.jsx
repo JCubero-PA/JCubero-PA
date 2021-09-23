@@ -224,7 +224,6 @@ const GrupoList = () => {
       // setDataSource(grupo_marcas_nn)
       setDataSource(grupo_marca_subgrupo)
     }
-    
   })
 
   return (

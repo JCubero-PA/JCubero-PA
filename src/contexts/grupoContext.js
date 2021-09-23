@@ -8,8 +8,8 @@ const GrupoContextProvider = (props) => {
 
   const grupoService = new GrupoService();
   const lineasMarcasService = new LineasMarcasService();
-  const [grupos, setGrupos] = useState([]);
-  const [grupo_marcas_nn, set_grupo_marcas_nn] = useState([]);
+  // const [grupos, setGrupos] = useState([]);
+  // const [grupo_marcas_nn, set_grupo_marcas_nn] = useState([]);
   const [grupo_marca_subgrupo, set_grupo_marcas_subgrupo] = useState([]);
   const [editGrupo, setEditGrupo] = useState(null);
   const [permiso, setPermiso] = useState(false);
@@ -94,8 +94,8 @@ const GrupoContextProvider = (props) => {
       updateGrupo,
       softDeleteGrupo,
       editGrupo,
-      grupos,
-      grupo_marcas_nn,
+      /*grupos,
+      grupo_marcas_nn,*/
       grupo_marca_subgrupo,
       permiso,
       setPermiso,

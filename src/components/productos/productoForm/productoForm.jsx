@@ -234,6 +234,8 @@ const FormProducto = (props) => {
 
   const editProducto = useSelector((state) => state.productos.producto);
   const serial = useSelector((state) => state.productos.serial);
+  const grupos = useSelector((state) => state.stocks.grupos);
+
   console.log("EL PROD", editProducto);
 
   useEffect(async () => {

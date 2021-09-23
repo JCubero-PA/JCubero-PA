@@ -27,6 +27,15 @@ export function getProductosByLinea(id){
     })
 }
 
+export function getProductosByGrupo(id){
+  console.log("el id", id)
+  return axios.post(baseUrl+"productos-grupo", id, {
+      headers: {
+        Authorization: `Bearer ${REACT_APP_API_KEY}`,
+      },
+    })
+}
+
 export function createProducto(producto){
   return axios.post(baseUrl+"producto/", producto, {
       headers: {

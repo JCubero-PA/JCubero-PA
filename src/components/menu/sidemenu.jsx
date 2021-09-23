@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import { /*StarOutlined, FormatPainterOutlined,*/ DollarCircleOutlined,
    MenuOutlined, HighlightOutlined, HomeOutlined, LineChartOutlined, 
    FundOutlined, WechatOutlined, BarcodeOutlined,
-   DownOutlined, BlockOutlined, BorderOutlined  } from '@ant-design/icons';
+   DownOutlined, BlockOutlined, BorderOutlined, CodeSandboxOutlined, DropboxOutlined  } from '@ant-design/icons';
 // import { useHistory } from "react-router";
 //LDKJVBLKSJDBVKLDBVLK
 import { Row, Col, Drawer } from 'antd';
@@ -53,8 +53,9 @@ let { path} = useRouteMatch();
           <Menu.Item key="6" icon={<DollarCircleOutlined />}><a href={`${path}/proveedores`}>PROVEEDORES</a></Menu.Item>
           <Menu.Item key="7" icon={<BarcodeOutlined />}><a href={`${path}/productos`}>PRODUCTOS</a></Menu.Item>
           {/* <Menu.Item key="8" icon={<FormatPainterOutlined />}><a href={`${path}/modelos`}>MODELOS</a></Menu.Item> */}
-          {<SubMenu key="sub2" icon={<LineChartOutlined />} title="REPORTES">
-            <Menu.Item key="8" icon={<BarcodeOutlined />}>STOCKS</Menu.Item>
+          {<SubMenu key="sub2" icon={<LineChartOutlined />} title="VISUALIZADORES">
+            <Menu.Item key="8" icon={<DropboxOutlined />}><a href={`${path}/visualizadores/stocks`}>STOCKS</a></Menu.Item>
+            <Menu.Item key="9" icon={<CodeSandboxOutlined />}><a href={`${path}/visualizadores/productos`}>PRODUCTOS</a></Menu.Item>
           </SubMenu>
           /*<SubMenu key="sub2" icon={<AppstoreOutlined />} title="PERSONAS">
             <Menu.Item key="10">CLIENTES</Menu.Item>

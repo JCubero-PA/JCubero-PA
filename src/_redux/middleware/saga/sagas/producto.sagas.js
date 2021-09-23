@@ -1,6 +1,6 @@
 import { takeLatest } from "redux-saga/effects";
-import { handleAddProducto, handleEditProducto, handleGetProducto, handleGetProductos, handleGetProductosByLinea, handleGetSerialModelo, handleSoftDeleteProducto } from "../handlers/producto.handlers";
-import { ADD_PRODUCTO, EDIT_PRODUCTO, GET_PRODUCTO, GET_PRODUCTOS, GET_PRODUCTOS_BY_LINEA, GET_SERIAL_MODELO, SOFT_DELETE_PRODUCTO } from "../../../ducks/producto.duck";
+import { handleAddProducto, handleEditProducto, handleGetProducto, handleGetProductos, handleGetProductosByGrupo, handleGetProductosByLinea, handleGetSerialModelo, handleSoftDeleteProducto } from "../handlers/producto.handlers";
+import { ADD_PRODUCTO, EDIT_PRODUCTO, GET_PRODUCTO, GET_PRODUCTOS, GET_PRODUCTOS_BY_GRUPO, GET_PRODUCTOS_BY_LINEA, GET_SERIAL_MODELO, SOFT_DELETE_PRODUCTO } from "../../../ducks/producto.duck";
 
 export function* saga() {
   yield takeLatest(GET_PRODUCTOS, handleGetProductos);
@@ -28,4 +28,8 @@ export function* saga6() {
 
 export function* saga7() {
     yield takeLatest(GET_SERIAL_MODELO, handleGetSerialModelo);
+}
+
+export function* saga8() {
+    yield takeLatest(GET_PRODUCTOS_BY_GRUPO, handleGetProductosByGrupo);
 }

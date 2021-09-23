@@ -312,6 +312,7 @@ if(sesions){
                     icon={<RollbackOutlined />}
                     type="primary"
                     onClick={goBackHistory}
+                    
                   >
                     REGRESAR
                   </Button>

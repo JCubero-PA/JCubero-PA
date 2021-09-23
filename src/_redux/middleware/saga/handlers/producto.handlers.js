@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { productoResponse, setProducto, setProductos, setProductosByLinea, _setSerialModelo} from "../../../ducks/producto.duck";
-import { createProducto, getAllProductos, getProducto, getProductosByLinea, softDeleteProducto, updateProducto,  getSerialModelo } from "../requests/producto.requests";
+import { productoResponse, setProducto, setProductos, setProductosByGrupo, setProductosByLinea, _setSerialModelo} from "../../../ducks/producto.duck";
+import { createProducto, getAllProductos, getProducto, getProductosByLinea, softDeleteProducto, updateProducto,  getSerialModelo, getProductosByGrupo } from "../requests/producto.requests";
 
 export function* handleGetProductos() {
   try {
@@ -30,6 +30,19 @@ export function* handleGetProductosByLinea(action) {
     const { data } = response;
     console.log("LA DATA", response)
     yield put(setProductosByLinea(data));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* handleGetProductosByGrupo(action) {
+  try {
+    console.log("ID!!!", action.id)
+
+    const response = yield call(getProductosByGrupo, {grupo_id : action.id});
+    const { data } = response;
+    console.log("LA DATA", response)
+    yield put(setProductosByGrupo(data));
   } catch (error) {
     console.log(error);
   }

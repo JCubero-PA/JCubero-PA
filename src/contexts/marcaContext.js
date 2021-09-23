@@ -6,21 +6,21 @@ export const MarcaContext = createContext();
 const MarcaContextProvider = (props) => {
 
   const marcaService = new MarcaService();
-  const [marcas, setMarcas] = useState([]);
+  // const [marcas, setMarcas] = useState([]);
   const [marcas_lineas_nn, set_marcas_lineas_nn] = useState([]);
   const [editMarca, setEditMarca] = useState(null);
   const [permiso, setPermiso] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    marcaService.getAll().then((data) => setMarcas(data));
+    // marcaService.getAll().then((data) => setMarcas(data));
     marcaService.get_marcas_lineas_nn().then((data) => set_marcas_lineas_nn(data));
   }, []);
 
   const createMarca = async(marca) => {
     const data = await marcaService.create(marca);
     if (data.message === "OK CREATE") {
-      marcaService.getAll().then((data) => setMarcas(data));
+      // marcaService.getAll().then((data) => setMarcas(data));
       marcaService.get_marcas_lineas_nn().then((data) => set_marcas_lineas_nn(data));
     }
     return data;
@@ -29,7 +29,8 @@ const MarcaContextProvider = (props) => {
   const softDeleteMarca = async(marca) => {
     const data = await marcaService.softDelete(marca);
     if (data.message === "OK SOFTDELETE") {
-      marcaService.getAll().then((data) => { if (data.length===0) setIsEmpty(true) ; setMarcas(data)});
+      // marcaService.getAll().then((data) => { if (data.length===0) setIsEmpty(true) ; setMarcas(data)});
+      marcaService.get_marcas_lineas_nn().then((data) => set_marcas_lineas_nn(data));
     }
     setEditMarca(null);
     return data;
@@ -53,7 +54,7 @@ const MarcaContextProvider = (props) => {
     const data = await marcaService.update(marca);
     // console.log("LA DATA QUE REGRESA DE UPDATEMARCA : ", JSON.stringify(data));
     if (data.message === "OK UPDATE") {
-      marcaService.getAll().then((data) => setMarcas(data));
+      // marcaService.getAll().then((data) => setMarcas(data));
       marcaService.get_marcas_lineas_nn().then((data) => set_marcas_lineas_nn(data)); // PREGUNTAR SI VA ESTO O CÓMO DEBERÍA IR
     }
 
@@ -68,7 +69,7 @@ const MarcaContextProvider = (props) => {
         updateMarca,
         softDeleteMarca,
         editMarca,
-        marcas,
+        /*marcas,*/
         marcas_lineas_nn,
         permiso,
         setPermiso,

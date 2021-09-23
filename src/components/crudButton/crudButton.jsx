@@ -11,7 +11,7 @@ let { REACT_APP_SEED } = process.env;
 const hashids = new Hashids(REACT_APP_SEED);
 
 const CrudButton = (props) => {
-  const { record, softDelete, setRowState, typeTransaction, permiso } = props;
+  const { record, softDelete, setRowState, typeTransaction, permiso, visualizador } = props;
   // console.log("LOS PROPS", props)
   let { path } = useRouteMatch();
   const [isModalVisible, setIsModalVisible] = useState(null);
@@ -21,7 +21,7 @@ const CrudButton = (props) => {
   // console.log("EL SOFDELETE DE CRUDBUTTON: " + softDelete);
   // console.log("EL ROWSTATE = ", setRowState )
   const dispatch = useDispatch();
-
+  console.log("El permiso", permiso)
   const showModal = (t) => {
     setRowState(false);
     setIsModalVisible(t);
@@ -166,7 +166,7 @@ const CrudButton = (props) => {
       {/* <Menu.Item icon={<EyeFilled />}key="1" onClick={ver}>
         Ver
       </Menu.Item> */}
-      {permiso || typeTransaction ? <Menu.Item icon={<EditFilled />} key="2" onClick={editar}>
+      {(permiso && !visualizador) || typeTransaction ? <Menu.Item icon={<EditFilled />} key="2" onClick={editar}>
         Editar
       </Menu.Item> :null }
       
@@ -176,7 +176,7 @@ const CrudButton = (props) => {
         </Menu.Item>
       ) : null}
 
-      {permiso || typeTransaction ? <Menu.Item icon={<DeleteFilled />} key="3" onClick={eliminar}>
+      {(permiso && !visualizador)|| typeTransaction ? <Menu.Item icon={<DeleteFilled />} key="3" onClick={eliminar}>
         Eliminar
       </Menu.Item> :null}
       

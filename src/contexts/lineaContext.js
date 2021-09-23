@@ -32,7 +32,7 @@ const LineaContextProvider = (props) => {
      const data = await lineaService.softDelete(linea);
      if (data.message === "OK SOFTDELETE") {
       lineaService.getAll().then((data) => { if (data.length===0) setIsEmpty(true) ; setLineas(data)});
-      
+      lineaService.get_lineas_marcas_nn().then((data) => { if (data.length===0) setIsEmpty(true) ; set_lineas_marcas_nn(data)});
     }
     setEditLinea(null);
     // console.log("El ultimo mensaje del SOFTDELETE : ", data.message);
