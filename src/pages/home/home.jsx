@@ -39,6 +39,8 @@ import { SubgrupoList } from "../../components/subgrupo/subgrupoList/subgrupoLis
 import SubgrupoContextProvider from "../../contexts/subgrupoContext";
 import { SesionContext } from "../../contexts/sesionContext";
 import Stocks from "../../components/visualizadores/stocks/stocks";
+
+import ProductosPalo from "../../components/visualizadores/palo/productosPalo";
 const Home = () => {
   var { setMoved, sesions, redirect } = useContext(SesionContext);
   let history = useHistory();
@@ -86,16 +88,16 @@ const Home = () => {
                 <Route exact path={`${path}/visualizadores/stocks`}>
                   <Stocks />
                 </Route>
-
+                <Route exact path={`${path}/visualizadores/palo/productosPalo`}>
+                  <ConfigProvider locale={es_ES}>
+                    <ProductosPalo />
+                  </ConfigProvider>
+                </Route>
                 <Route path={`${path}/(productos|visualizadores/stocks|visualizadores/productos)/:codigo?/:operacion?`}>
                   <ConfigProvider locale={es_ES}>
                     <ProductoForm />
                   </ConfigProvider>
-
                 </Route>
-
-
-
                 <Route exact path={`${path}`}>
                   <Layout
                     style={{
@@ -112,15 +114,14 @@ const Home = () => {
                       }}
                     >
                       {/* PALO PRODUCTOS -ALTO */}
-                      <img src={logo} alt="logo" className="logo" 
+                      <img src={logo} alt="logo" className="logo"
                       // style={{
                       //   height: "300px",
                       //   width: "300px",
                       //   marginLeft: "10px"
 
                       // }}
-                       />
-
+                      />
                     </span>
                   </Layout>
                 </Route>
@@ -227,10 +228,5 @@ const Home = () => {
         : history.push("/login")}
     </>
   );
-
-
-
-
 };
-
 export default Home;

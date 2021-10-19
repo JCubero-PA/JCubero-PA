@@ -24,6 +24,7 @@ import ProductoList from "../../productos/productoList/productoList";
 import { useHistory, useRouteMatch } from "react-router";
 
 const ProductoStocks = () => {
+  console.log("ENTRAAA EN ELL Q ")
   // const subgrupos = useSelector((state) => state.stocks.subgrupos);
   // const productos = useSelector((state) => state.productos.productos);
   // const grupos = useSelector((state) => state.stocks.grupos);
@@ -306,112 +307,112 @@ const ProductoStocks = () => {
 
   };
 
-  if (!selectedGrupoID) {
-    return !loading ? (
-      <>
-        {hasReturn && (
-          <div><Button
-            type="primary"
-            style={{ marginLeft: "91vw" }}
-            icon={<ArrowLeftOutlined />}
-            onClick={() => goBack()}
-          />&nbsp;<Button
-              type="primary"
-              // style={{ marginLeft: "91vw" }}
-              icon={<HomeOutlined />}
-             onClick={() => goBackHome()}
-            /></div>
-        )}
+  // if (!selectedGrupoID) {
+  //   return !loading ? (
+  //     <>
+  //       {hasReturn && (
+  //         <div><Button
+  //           type="primary"
+  //           style={{ marginLeft: "91vw" }}
+  //           icon={<ArrowLeftOutlined />}
+  //           onClick={() => goBack()}
+  //         />&nbsp;<Button
+  //             type="primary"
+  //             // style={{ marginLeft: "91vw" }}
+  //             icon={<HomeOutlined />}
+  //            onClick={() => goBackHome()}
+  //           /></div>
+  //       )}
 
-        <Divider orientation="left">{title} </Divider>
-        {/*<Divider className="titleFont" orientation="left">{"LINEA SLEECTED: " + selectedLineaID}</Divider>
-        <Divider className="titleFont">{"GRUPO SLEECTED: " + selectedGrupoID}</Divider>
-        <Divider className="titleFont">{"MARCA SLEECTED: " + selectedMarcaID}</Divider>
-        <Divider className="titleFont">{"GRUPOS DATA: " + JSON.stringify(grupos)}</Divider>
-        <Divider className="titleFont">{"CHECKPOINT: " + checkPoint}</Divider>
-        <Divider className="titleFont">{"HASRETURN: " + hasReturn}</Divider>
-        <Divider className="titleFont">{"SUBGRUPOS DATA: " + JSON.stringify(subgrupos)}</Divider>
-        <Divider className="titleFont">{"MARCAS DATA: " + JSON.stringify(marcas)}</Divider>
-        <Divider className="titleFont">{"LINEAS DATA: " + JSON.stringify(lineas)}</Divider> */}
-        {/* <Button type="primary" style={{width:'100%', textAlign:'left'}} onClick={(()=>{lineas ? goMarcas('all'): goLineas('all')})}>TODOS <ArrowRightOutlined/></Button> */}
-        <List
-          itemLayout="horizontal"
-          style={{ marginTop: "8vh" }}
-          dataSource={
-            grupos
-              ? grupos
-              : marcas && checkPoint
-                ? marcas
-                : marcas
-                  ? lineas
-                  : lineas
-            // lineas ? lineas :  marcas && checkPoint
-            // ? marcas : []
+  //       <Divider orientation="left">{title} </Divider>
+  //       {/*<Divider className="titleFont" orientation="left">{"LINEA SLEECTED: " + selectedLineaID}</Divider>
+  //       <Divider className="titleFont">{"GRUPO SLEECTED: " + selectedGrupoID}</Divider>
+  //       <Divider className="titleFont">{"MARCA SLEECTED: " + selectedMarcaID}</Divider>
+  //       <Divider className="titleFont">{"GRUPOS DATA: " + JSON.stringify(grupos)}</Divider>
+  //       <Divider className="titleFont">{"CHECKPOINT: " + checkPoint}</Divider>
+  //       <Divider className="titleFont">{"HASRETURN: " + hasReturn}</Divider>
+  //       <Divider className="titleFont">{"SUBGRUPOS DATA: " + JSON.stringify(subgrupos)}</Divider>
+  //       <Divider className="titleFont">{"MARCAS DATA: " + JSON.stringify(marcas)}</Divider>
+  //       <Divider className="titleFont">{"LINEAS DATA: " + JSON.stringify(lineas)}</Divider> */}
+  //       {/* <Button type="primary" style={{width:'100%', textAlign:'left'}} onClick={(()=>{lineas ? goMarcas('all'): goLineas('all')})}>TODOS <ArrowRightOutlined/></Button> */}
+  //       <List
+  //         itemLayout="horizontal"
+  //         style={{ marginTop: "8vh" }}
+  //         dataSource={
+  //           grupos
+  //             ? grupos
+  //             : marcas && checkPoint
+  //               ? marcas
+  //               : marcas
+  //                 ? lineas
+  //                 : lineas
+  //           // lineas ? lineas :  marcas && checkPoint
+  //           // ? marcas : []
 
-            /* marcas && checkPoint
-             ? marcas
-             : marcas
-               ? lineas
-               : lineas*/
+  //           /* marcas && checkPoint
+  //            ? marcas
+  //            : marcas
+  //              ? lineas
+  //              : lineas*/
 
-            // marcas && checkPoint ? marcas : lineas ? lineas : []
+  //           // marcas && checkPoint ? marcas : lineas ? lineas : []
 
-          }
-          renderItem={(item) => (
-            <List.Item
-              style={{ textAlign: "left", marginLeft: "3vw", cursor: "pointer" }}
-              onClick={() =>
-                /*_grupos
-                  ? goProductos(item.id)
-                  : marcas && checkPoint
-                    ? goGrupos2(item.id)
-                    : lineas
-                      ? goMarcas2(item.id)
-                      : goLineas(item.id)*/
-                  grupos
-                  ? goProductos(item.id)
-                  : marcas && checkPoint
-                    ? goGrupos2(item)
-                    : lineas
-                      ? goMarcas2(item.id)
-                      : goLineas(item.id)
-              }
-            >
-              {/* grupos
-              ? grupos
-              : marcas && checkPoint
-                ? marcas
-                : marcas
-                  ? lineas
-                  : lineas */}
-              <List.Item.Meta
-                // avatar={ 
-                //   marcas && checkPoint ? item.countgrupos :
-                //   lineas ? (item.marcas_nn).length > 0 ? (item.marcas_nn).length : "0" : ""}
-
-
+  //         }
+  //         renderItem={(item) => (
+  //           <List.Item
+  //             style={{ textAlign: "left", marginLeft: "3vw", cursor: "pointer" }}
+  //             onClick={() =>
+  //               /*_grupos
+  //                 ? goProductos(item.id)
+  //                 : marcas && checkPoint
+  //                   ? goGrupos2(item.id)
+  //                   : lineas
+  //                     ? goMarcas2(item.id)
+  //                     : goLineas(item.id)*/
+  //                 grupos
+  //                 ? goProductos(item.id)
+  //                 : marcas && checkPoint
+  //                   ? goGrupos2(item)
+  //                   : lineas
+  //                     ? goMarcas2(item.id)
+  //                     : goLineas(item.id)
+  //             }
+  //           >
+  //             {/* grupos
+  //             ? grupos
+  //             : marcas && checkPoint
+  //               ? marcas
+  //               : marcas
+  //                 ? lineas
+  //                 : lineas */}
+  //             <List.Item.Meta
+  //               // avatar={ 
+  //               //   marcas && checkPoint ? item.countgrupos :
+  //               //   lineas ? (item.marcas_nn).length > 0 ? (item.marcas_nn).length : "0" : ""}
 
 
-                // avatar={
-                //   <Avatar
-                //     style={{ color: "black", backgroundColor: "#8a8a8a" }}
-                //   >
-                //     {(item.marcas_nn).length}
+
+
+  //               // avatar={
+  //               //   <Avatar
+  //               //     style={{ color: "black", backgroundColor: "#8a8a8a" }}
+  //               //   >
+  //               //     {(item.marcas_nn).length}
                     
-                //   </Avatar>
-                // }
-                title={<p style={{ fontWeight: "bold" }}>{/*item.id*/}{item.nombre}</p>}
-                // description={_grupos && item.fk_lineamarca.fk_marca.nombre}
-              />
-              <ArrowRightOutlined style={{ marginRight: "3vw" }} />
-            </List.Item>
-          )}
-        />
-      </>
-    ) : (
-      <Spin indicator={antIcon} className="loading" />
-    );
-  } else {
+  //               //   </Avatar>
+  //               // }
+  //               title={<p style={{ fontWeight: "bold" }}>{/*item.id*/}{item.nombre}</p>}
+  //               // description={_grupos && item.fk_lineamarca.fk_marca.nombre}
+  //             />
+  //             <ArrowRightOutlined style={{ marginRight: "3vw" }} />
+  //           </List.Item>
+  //         )}
+  //       />
+  //     </>
+  //   ) : (
+  //     <Spin indicator={antIcon} className="loading" />
+  //   );
+  // } else {
     return (
       <>
         {hasReturn && (
@@ -422,16 +423,17 @@ const ProductoStocks = () => {
             onClick={() => goBack()}
           />
         )}
+        <Divider>WWWW222</Divider>
         <ProductoList
-          stocks={true}
+          // stocks={true}
           visualizador={true}
-          lineaV={selectedLineaID}
-          marcaV={selectedMarcaID}
-          grupoV={selectedGrupoID}
+          // lineaV={selectedLineaID}
+          // marcaV={selectedMarcaID}
+          // grupoV={selectedGrupoID}
         />
       </>
     );
-  }
+  
 };
 
 export default ProductoStocks;

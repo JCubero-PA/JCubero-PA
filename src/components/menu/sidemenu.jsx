@@ -41,8 +41,7 @@ const SideMenu = () => {
         closable={true}
         onClose={onClose}
         visible={visible}
-        width="270px"
-       
+        width="300px"
         footer="2021 PA - TI | All Rights Reserved." >
         <Menu
           style={{ width: "100%" }}
@@ -75,7 +74,8 @@ const SideMenu = () => {
             {/* <Menu.Item key="8" icon={<DropboxOutlined />}><a href={`${path}/visualizadores/productoStocks`}>STOCKS</a></Menu.Item> */}
             {/* <Menu.Item key="8" icon={<DropboxOutlined />}><a href={`${path}/visualizadores/stocks`}>STOCKS</a></Menu.Item> */}
 
-            <Menu.Item key="8" icon={<CodeSandboxOutlined />}><a href={`${path}/visualizadores/productos`}>PRODUCTOS</a></Menu.Item>
+            <Menu.Item key="8" icon={<CodeSandboxOutlined />}><a href={`${path}/visualizadores/productos`}>PRODUCTOS - HOJAS</a></Menu.Item>
+            <Menu.Item key="9" icon={<CodeSandboxOutlined />}><a href={`${path}/visualizadores/palo/productosPalo`}>PRODUCTOS - PALO</a></Menu.Item>
           </SubMenu>
           /*<SubMenu key="sub2" icon={<AppstoreOutlined />} title="PERSONAS">
             <Menu.Item key="10">CLIENTES</Menu.Item>

@@ -4,28 +4,39 @@ import { Button } from "antd";
 import { Table } from "antd";
 import { PlusOutlined, SmileOutlined, StopOutlined } from "@ant-design/icons";
 import { LoadingOutlined } from "@ant-design/icons";
-import { ProductoContext } from "../../../contexts/productoContext";
-import CrudButton from "../../crudButton/crudButton";
+// import { ProductoContext } from "../../../contexts/productoContext"; COMENTADO POR MANUEL CORONEL (DEPURACION)
+// import CrudButton from "../../crudButton/crudButton"; // CAMBIADO MANUEL CORONEL
+import CrudButton from "../../../../crudButton/crudButton";
 import { useHistory } from "react-router";
 import { useRouteMatch } from "react-router-dom";
 import Search from "antd/lib/input/Search";
-import "./productoList.css";
+// import "./productoList.css";
 // import SelectOpciones from "../../selectOpciones/selectOpciones";
 // import Checkbox from "antd/lib/checkbox/Checkbox";
-import QueryButton from "./queryButton";
+// import QueryButton from "./queryButton";// CAMBIADO MANUEL CORONEL
+import QueryButton from "../..//../productoList/queryButton";
 import { useDispatch, useSelector } from "react-redux";
+// import {
+//   getProductos,
+//   getProductosByLinea,
+//   getProductosByEstado,
+//   _softDeleteProducto,
+// } from "../../../_redux/ducks/producto.duck";
+
 import {
-  getProductos,
-  getProductosByLinea,
-  getProductosByEstado,
-  _softDeleteProducto,
-} from "../../../_redux/ducks/producto.duck";
+    getProductos,
+    getProductosByLinea,
+    getProductosByEstado,
+    _softDeleteProducto,
+  } from "../../../../../_redux/ducks/producto.duck";
+
 import { useLocation } from 'react-router-dom';
-import { SesionContext } from "../../../contexts/sesionContext";
+// import { SesionContext } from "../../../contexts/sesionContext"; // CAMBIADO MANUEL CORONEL
+import { SesionContext } from "../../../../../contexts/sesionContext";
 
 const { Option } = Select;
-const ProductoList = (props) => {
-  console.log("YAAAAAAA EL CONSOLE EN PRODUCTOLISTJSX")
+const ProductosPaloList = (props) => {
+  console.log("2222 YAAAAAAA EL CONSOLE EN PRODUCTOPALOLISTJSX   2222")
   const location = useLocation();
   const { setMoved, sesions } = useContext(SesionContext);
   const { lineaV, marcaV, grupoV, visualizador, stocks } = props;
@@ -57,6 +68,8 @@ const ProductoList = (props) => {
   const loading = useSelector((state) => state.productos.loading);
   const response = useSelector((state) => state.productos.response);
   const grupos = null; // AGREGADO POR MANUEL CORONEL
+
+  console.log("ENTRA A PRODUCT LIST PALO ")
 
   const [valueEstado, setValueEstado] = useState(
     grupos
@@ -117,7 +130,6 @@ const ProductoList = (props) => {
   };
 
   const dispatch = useDispatch();
-
   useEffect(async () => {
     await dispatch(getProductosByEstado(""));
   }, []);
@@ -629,7 +641,7 @@ const ProductoList = (props) => {
     <div>
 
       <br />
-      <Divider>PRODUCTOS</Divider>
+      <Divider>PRODUCTOS PALO LIST VISUALIZADOR </Divider>
       {/* <Divider className="titleFont">{"EL TODODS- ACT -DESC: " + valueEstado}</Divider>
       {/* <Divider className="titleFont">{"RESPONSE: " + response}</Divider> */}
       {/* <Divider className="titleFont">{"EL visualizador: " + visualizador}</Divider> */}
@@ -828,4 +840,4 @@ const ProductoList = (props) => {
   );
 };
 
-export default ProductoList;
+export default ProductosPaloList;
