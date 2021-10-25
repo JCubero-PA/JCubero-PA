@@ -40,7 +40,7 @@ import SubgrupoContextProvider from "../../contexts/subgrupoContext";
 import { SesionContext } from "../../contexts/sesionContext";
 import Stocks from "../../components/visualizadores/stocks/stocks";
 
-import ProductosPalo from "../../components/visualizadores/palo/productosPalo";
+import _ProductosPalo from "../../components/visualizadores/palo/_productosPalo";
 const Home = () => {
   var { setMoved, sesions, redirect } = useContext(SesionContext);
   let history = useHistory();
@@ -88,9 +88,9 @@ const Home = () => {
                 <Route exact path={`${path}/visualizadores/stocks`}>
                   <Stocks />
                 </Route>
-                <Route exact path={`${path}/visualizadores/palo/productosPalo`}>
+                <Route exact path={`${path}/visualizadores/palo/_productosPalo`}>
                   <ConfigProvider locale={es_ES}>
-                    <ProductosPalo />
+                    <_ProductosPalo />
                   </ConfigProvider>
                 </Route>
                 <Route path={`${path}/(productos|visualizadores/stocks|visualizadores/productos)/:codigo?/:operacion?`}>

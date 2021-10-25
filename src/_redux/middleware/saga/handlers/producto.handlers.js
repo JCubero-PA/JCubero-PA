@@ -24,7 +24,7 @@ export function* handleGetProducto(action) {
 
 export function* handleGetProductosByEstado(action) {
   try {
-    console.log("ESTADO!!!", action.estado)
+    // console.log("ESTADO!!!", action.estado)
     // const response = yield call(getProductosByEstado, {estado : action.estado});
     const response = yield call(getProductosByEstado, action.estado);
     const { data } = response;
