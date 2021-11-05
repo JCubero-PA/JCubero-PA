@@ -653,8 +653,6 @@ const ProductoList = (props) => {
 
 
   const filtrarE = async (e) => {
-
-
     const filteredData = productos_estado.filter((entry) => (e === 0 ? productos_estado : entry.estado === e) && (selectedSubgrupoId === 0 || !selectedSubgrupoId ? productos_estado : entry.fk_subgrupo_id === selectedSubgrupoId) && (selectedInventarioId === 0 || !selectedInventarioId ? productos_estado : entry.fk_tipo_inventario_id === selectedInventarioId) && (selectedMetodoabcId === 0 || !selectedMetodoabcId ? productos_estado : entry.fk_metodo_abc_id === selectedMetodoabcId) && (selectedEnpaginaId === 0 || !selectedEnpaginaId ? productos_estado : entry.fk_en_web_id === selectedEnpaginaId));
     //console.log("FILTRADOS X ESTADO: ", filteredData);
     //console.log("productos estado: ", productos_estado);
